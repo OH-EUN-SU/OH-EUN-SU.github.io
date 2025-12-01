@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Sudoku</h1>
+            <div class="controls">
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Normal</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <button id="new-game-btn">New Game</button>
+                <button id="reset-btn">Reset</button>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <div class="game-left-panel">
+                <div id="sudoku-board" class="board"></div>
+
+                <div class="numpad">
+                    <button class="num-btn" data-num="1">1</button>
+                    <button class="num-btn" data-num="2">2</button>
+                    <button class="num-btn" data-num="3">3</button>
+                    <button class="num-btn" data-num="4">4</button>
+                    <button class="num-btn" data-num="5">5</button>
+                    <button class="num-btn" data-num="6">6</button>
+                    <button class="num-btn" data-num="7">7</button>
+                    <button class="num-btn" data-num="8">8</button>
+                    <button class="num-btn" data-num="9">9</button>
+                </div>
+
+                <div class="game-actions">
+                    <button class="action-btn" id="erase-btn">Erase</button>
+                    <button class="action-btn" id="note-btn">Note: Off</button>
+                    <button class="action-btn" id="hint-btn">Hint (3)</button>
+                    <button class="action-btn" id="check-btn">Check</button>
+                </div>
+            </div>
+
+            <div id="number-counts" class="number-counts">
+                <!-- Counts will be generated here -->
+            </div>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+:root {
+    --bg-color: #f0f2f5;
+    --board-bg: #ffffff;
+    --text-color: #2c3e50;
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --accent-color: #e74c3c;
+    --grid-line: #bdc3c7;
+    --grid-line-thick: #34495e;
+    --cell-hover: #e8f6f3;
+    --cell-selected: #d6eaf8;
+    --cell-related: #ebf5fb;
+    --text-user: #2980b9;
+    --text-initial: #2c3e50;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--board-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 95vw;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+select,
+button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--grid-line);
+    border-radius: 0.5rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-weight: 500;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+select {
+    background-color: white;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 0;
+    border: 2px solid var(--grid-line-thick);
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    background-color: var(--board-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    border: 1px solid var(--grid-line);
+    user-select: none;
+    position: relative;
+}
+
+.cell:nth-child(9n) {
+    border-right: none;
+}
+
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid var(--grid-line-thick);
+}
+
+.cell:nth-child(9n) {
+    border-right: 1px solid var(--grid-line);
+}
+
+.cell:nth-last-child(-n+9) {
+    border-bottom: 1px solid var(--grid-line);
+}
+
+.cell.border-right {
+    border-right: 2px solid var(--grid-line-thick);
+}
+
+.cell.border-bottom {
+    border-bottom: 2px solid var(--grid-line-thick);
+}
+
+.cell.selected {
+    background-color: #64b5f6 !important;
+}
+
+.cell.related {
+    background-color: var(--cell-related);
+}
+
+.cell.same-num {
+    background-color: #a9cce3 !important;
+}
+
+.cell.error {
+    background-color: #fadbd8;
+    color: var(--accent-color);
+}
+
+.cell.user-input {
+    color: var(--text-user);
+    font-weight: 600;
+}
+
+.cell.hint-cell {
+    background-color: #abebc6 !important;
+    border: 2px solid #27ae60;
+    animation: highlight-hint 1.5s ease-in-out;
+}
+
+@keyframes highlight-hint {
+    0% {
+        background-color: #2ecc71;
+    }
+
+    100% {
+        background-color: #abebc6;
+    }
+}
+
+.numpad {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.game-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.num-btn {
+    font-size: 1.5rem;
+    padding: 0;
+    flex: 1 1 0;
+    min-width: 35px;
+    text-align: center;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn {
+    flex: 1 0 40%;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+#hint-btn {
+    background-color: #9b59b6;
+}
+
+#hint-btn:hover {
+    background-color: #8e44ad;
+}
+
+#hint-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.message {
+    min-height: 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.note-num {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Number Counts Styles */
+.number-counts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    min-width: 120px;
+}
+
+.count-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--text-color);
+    padding: 0.2rem 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.count-item:last-child {
+    border-bottom: none;
+}
+
+.count-item .num {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.count-item .count {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.count-item.complete {
+    opacity: 0.3;
+}
+
+.count-item.exceeded .num,
+.count-item.exceeded .count {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.cell.limit-exceeded {
+    color: var(--accent-color) !important;
+    font-weight: bold;
+}
+
+@media (max-width: 850px) {
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .number-counts {
+        flex-direction: row;
+        width: 100%;
+        max-width: 450px;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .count-item {
+        flex-direction: column;
+        border-bottom: none;
+    }
+
+    .cell {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+}
+
+#reset-btn {
+    background-color: #7f8c8d;
+}
+
+#reset-btn:hover {
+    background-color: #95a5a6;
+}
